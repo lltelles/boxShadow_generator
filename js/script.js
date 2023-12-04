@@ -13,18 +13,39 @@ class BoxShadowGenerator {
     webkitRule,
     mozRule
   ) {
-    this.horizontal = horizontal
-    this.horizontalRef = horizontalRef
-    this.vertical = vertical
-    this.verticalRef = verticalRef
-    this.blur = blur
-    this.blurRef = blurRef
-    this.spread = spread
-    this.spreadRef = spreadRef
-    this.previewBox = spreadRef
-    this.rule = rule
-    this.webkitRule = webkitRule
-    this.mozRule = mozRule
+    this.horizontal = horizontal;
+    this.horizontalRef = horizontalRef;
+    this.vertical = vertical;
+    this.verticalRef = verticalRef;
+    this.blur = blur;
+    this.blurRef = blurRef;
+    this.spread = spread;
+    this.spreadRef = spreadRef;
+    this.previewBox = previewBox;
+    this.rule = rule;
+    this.webkitRule = webkitRule;
+    this.mozRule = mozRule;
+  }
+
+  initialize() {
+    this.horizontalRef.value = this.horizontal.value;
+    this.verticalRef.value = this.vertical.value;
+    this.spreadRef.value = this.spread.value;
+    this.blurRef.value = this.blur.value;
+
+    this.applyRule();
+    this.showRule();
+  }
+
+  applyRule() {
+    this.previewBox.style.boxShadow = `${this.horizontalRef.value}px ${this.verticalRef.value}px ${this.blurRef.value}px ${this.spreadRef.value}px #000000`;
+    this.currentRule = this.previewBox.style.boxShadow
+  }
+
+  showRule() {
+    this.rule.innerText = this.currentRule
+    this.webkitRule.innerText = this.currentRule
+    this.mozRule.innerText = this.currentRule
   }
 }
 
@@ -44,18 +65,20 @@ const rule = document.querySelector("#rule span");
 const webkitRule = document.querySelector("#webkit-rule span");
 const mozRule = document.querySelector("#moz-rule span");
 
-const boxShadow = new BoxShadowGenerator( horizontal,
-    horizontalRef,
-    vertical,
-    verticalRef,
-    blur,
-    blurRef,
-    spread,
-    spreadRef,
-    previewBox,
-    rule,
-    webkitRule,
-    mozRule)
+const boxShadow = new BoxShadowGenerator(
+  horizontal,
+  horizontalRef,
+  vertical,
+  verticalRef,
+  blur,
+  blurRef,
+  spread,
+  spreadRef,
+  previewBox,
+  rule,
+  webkitRule,
+  mozRule
+);
 
-    console.log(boxShadow)
+boxShadow.initialize();
 // Eventos
