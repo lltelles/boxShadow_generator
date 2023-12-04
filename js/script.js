@@ -211,6 +211,7 @@ if (resetBtn) {
     boxShadow.updateValue("spread", 3);
     boxShadow.updateValue("color", "#000000");
     boxShadow.updateValue("opacity", 1);
+    boxShadow.updateValue("inset", false);
   });
 }
 
@@ -221,10 +222,10 @@ const copyInstructions = document.querySelector("#copy-instructions")
 rulesArea.addEventListener("click", () => {
     const rules = rulesArea.innerText.replace(/^\s*\n/gm, "")
     navigator.clipboard.writeText(rules).then(() => {
-        copyInstructions.innerText = "Regra copiada com sucesso!"
+        copyInstructions.innerText = "Rule copied successfully!"
 
         setTimeout(() => {
-            copyInstructions.innerText = "Clique no quadro a cima para copiar as regras."
+            copyInstructions.innerText = "Click on the box above to copy the rules."
         }, 2000)
     })
 })
