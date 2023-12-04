@@ -213,3 +213,20 @@ if (resetBtn) {
     boxShadow.updateValue("opacity", 1);
   });
 }
+
+// copiar regra
+const rulesArea = document.querySelector("#rules-area")
+const copyInstructions = document.querySelector("#copy-instructions")
+
+rulesArea.addEventListener("click", () => {
+    const rules = rulesArea.innerText.replace(/^\s*\n/gm, "")
+    navigator.clipboard.writeText(rules).then(() => {
+        copyInstructions.innerText = "Regra copiada com sucesso!"
+
+        setTimeout(() => {
+            copyInstructions.innerText = "Clique no quadro a cima para copiar as regras."
+        }, 2000)
+    })
+})
+
+
