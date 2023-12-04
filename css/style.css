@@ -99,3 +99,12 @@ h2 {
   border: 2px solid #e9d60a;
   padding: 1rem;
 }
+
+.reset-btn {
+  max-width: 100px;
+  margin: 0 auto;
+}
+
+.reset-btn button {
+  padding: 0.25rem;
+}

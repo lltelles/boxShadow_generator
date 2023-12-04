@@ -78,6 +78,7 @@ const blur = document.querySelector("#blur");
 const blurRef = document.querySelector("#blur-value");
 const spread = document.querySelector("#spread");
 const spreadRef = document.querySelector("#spread-value");
+const resetBtn = document.querySelector("#reset-btn");
 
 const previewBox = document.querySelector("#box");
 
@@ -127,3 +128,16 @@ spread.addEventListener("input", (e) => {
 
   boxShadow.updateValue("spread", value);
 });
+
+if (resetBtn) {
+  resetBtn.addEventListener("click", () => {
+    horizontal.value = 5;
+    vertical.value = 5;
+    blur.value = 10;
+    spread.value = 3;
+    boxShadow.updateValue("horizontal", 5);
+    boxShadow.updateValue("vertical", 5);
+    boxShadow.updateValue("blur", 10);
+    boxShadow.updateValue("spread", 3);
+  });
+}
