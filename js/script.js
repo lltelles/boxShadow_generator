@@ -42,14 +42,19 @@ class BoxShadowGenerator {
     this.verticalRef.value = this.vertical.value;
     this.spreadRef.value = this.spread.value;
     this.blurRef.value = this.blur.value;
+    this.colorRef.value = this.color.value;
 
     this.applyRule();
     this.showRule();
   }
 
   applyRule() {
-    this.previewBox.style.boxShadow = `${this.horizontalRef.value}px ${this.verticalRef.value}px ${this.blurRef.value}px ${this.spreadRef.value}px #000000`;
-    this.currentRule = this.previewBox.style.boxShadow;
+    const rgbValue = this.hexToRgb(this.colorRef.value);
+
+    const shadowRule = `${this.horizontalRef.value}px ${this.verticalRef.value}px ${this.blurRef.value}px ${this.spreadRef.value}px rgba(${rgbValue})`
+
+    this.previewBox.style.boxShadow = shadowRule;
+    this.currentRule = shadowRule;
   }
 
   showRule() {
@@ -72,10 +77,19 @@ class BoxShadowGenerator {
       case "spread":
         this.spreadRef.value = value;
         break;
+      case "color":
+        this.colorRef.value = value;
+        break;
     }
 
     this.applyRule();
     this.showRule();
+  }
+
+  hexToRgb(hex) {
+    return `${("0x" + hex[1] + hex[2]) | 0}, ${("0x" + hex[3] + hex[4]) | 0}, ${
+      ("0x" + hex[5] + hex[6]) | 0
+    }`;
   }
 }
 
@@ -121,7 +135,6 @@ const boxShadow = new BoxShadowGenerator(
   mozRule
 );
 
-console.log(boxShadow)
 boxShadow.initialize();
 
 // Eventos
@@ -150,8 +163,16 @@ spread.addEventListener("input", (e) => {
   boxShadow.updateValue("spread", value);
 });
 
+color.addEventListener("input", (e) => {
+  const value = e.target.value;
+
+  boxShadow.updateValue("color", value);
+});
+
 if (resetBtn) {
-  resetBtn.addEventListener("click", () => {
+  resetBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+
     horizontal.value = 5;
     vertical.value = 5;
     blur.value = 10;
