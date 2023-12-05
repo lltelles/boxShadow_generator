@@ -163,4 +163,12 @@ h2 {
   #rules-area {
     margin: 1rem;
   }
+
+  #rules-area p {
+    font-size: 0.75rem;
+  }
+
+  #copy-instructions {
+    font-size: 0.75rem;
+  }
 }
